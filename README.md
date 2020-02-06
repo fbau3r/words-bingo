@@ -17,3 +17,11 @@ At the end of the game remove the file `my-words-used.txt` with the following co
 ```bash
 rm my-words-used.txt
 ```
+
+## Dependencies
+
+This script uses `espeak` TTS. To install with apt-get use the following command:
+
+```bash
+sudo apt-get install espeak
+```

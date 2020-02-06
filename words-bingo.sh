@@ -3,6 +3,8 @@
 wordlist_filename=my-words.txt
 used_words_filename=my-words-used.txt
 
+espeak_command="espeak -v en-us"
+
 list_left_words() {
     cat $wordlist_filename | \
         sort -u | \
@@ -22,13 +24,38 @@ touch $used_words_filename
 while [ 0 -lt "$( list_left_words | wc -l )" ]; do
     clear
     echo -e "\e[33m"
-    list_left_words | \
-        shuf -n 1   | \
+    word=$(list_left_words | \
+        shuf -n 1)
+    echo $word | \
         tee -a $used_words_filename
     echo -e "\e[0m"
 
-    # wait for ENTER key to display the next word
-    read -p "Press ENTER to see the next random word..."
+    if [ -n "$espeak_command" ]; then
+        counter=0
+        while : ; do
+            $espeak_command "$word"
+
+            # wait for user input...
+            [ $counter -eq 0 ] && echo '
+r ........ repeat current word
+ENTER .... next random word
+q ........ quit program'
+            read -n1 -p "" user_input
+            ((counter++))
+
+            [ "$user_input" == "r" ] && continue
+            [ "$user_input" == "q" ] && { echo; exit 0; }
+            break
+        done
+    else
+        # wait for user input...
+        echo '
+ENTER .... next random word
+q ........ quit program'
+        read -p "" user_input
+
+        [ "$user_input" == "q" ] && { echo; exit 0; }
+    fi
 done
 
 # all words used up

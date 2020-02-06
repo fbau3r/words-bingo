@@ -44,7 +44,7 @@ q ........ quit program'
             ((counter++))
 
             [ "$user_input" == "r" ] && continue
-            [ "$user_input" == "q" ] && exit 0
+            [ "$user_input" == "q" ] && { echo; exit 0; }
             break
         done
     else
@@ -54,7 +54,7 @@ ENTER .... next random word
 q ........ quit program'
         read -p "" user_input
 
-        [ "$user_input" == "q" ] && exit 0
+        [ "$user_input" == "q" ] && { echo; exit 0; }
     fi
 done
 

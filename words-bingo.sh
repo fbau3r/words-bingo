@@ -4,8 +4,6 @@ wordlist_filename=my-words.txt
 used_words_filename=my-words-used.txt
 
 espeak_command="espeak -v en-us"
-espeak_repeats=2
-espeak_pause_seconds=1
 
 list_left_words() {
     cat $wordlist_filename | \
@@ -35,10 +33,7 @@ while [ 0 -lt "$( list_left_words | wc -l )" ]; do
     if [ -n "$espeak_command" ]; then
         counter=0
         while : ; do
-            for i in $(seq 1 $espeak_repeats); do
-                $espeak_command "$word"
-                [ -n "$espeak_pause_seconds" ] && sleep $espeak_pause_seconds
-            done
+            $espeak_command "$word"
 
             # wait for user input...
             [ $counter -eq 0 ] && echo '

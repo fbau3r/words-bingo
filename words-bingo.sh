@@ -22,8 +22,9 @@ touch $used_words_filename
 while [ 0 -lt "$( list_left_words | wc -l )" ]; do
     clear
     echo -e "\e[33m"
-    list_left_words | \
-        shuf -n 1   | \
+    word=$(list_left_words | \
+        shuf -n 1)
+    echo $word | \
         tee -a $used_words_filename
     echo -e "\e[0m"
 

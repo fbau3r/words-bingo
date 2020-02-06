@@ -5,10 +5,17 @@ used_words_filename=.used-$(basename $wordlist_filename)
 
 espeak_command="espeak -v en-us"
 
+list_all_words() {
+    cat $wordlist_filename | sort -u
+}
+
+list_used_words() {
+    cat $used_words_filename | sort -u
+}
+
 list_left_words() {
-    cat $wordlist_filename | \
-        sort -u | \
-        comm -23 - <(cat $used_words_filename | sort -u)
+    list_all_words | \
+        comm -23 - <(list_used_words)
 }
 
 # is there a wordlist?
@@ -21,7 +28,7 @@ fi
 touch $used_words_filename
 
 # as long as we have unused words in the list
-while [ 0 -lt "$( list_left_words | wc -l )" ]; do
+while [ 0 -lt "$(list_left_words | wc -l)" ]; do
     clear
     echo -e "\e[33m"
     word=$(list_left_words | \
@@ -29,6 +36,12 @@ while [ 0 -lt "$( list_left_words | wc -l )" ]; do
     echo $word | \
         tee -a $used_words_filename
     echo -e "\e[0m"
+    echo
+
+    used_words=$(list_used_words | wc -l)
+    unused_words=$(list_left_words | wc -l)
+    total_words=$(($used_words + $unused_words))
+    echo -e "\e[36mHint\e[0m: Unused words: \e[32m$unused_words\e[0m, total words: \e[33m$total_words\e[0m, used words: \e[31m$used_words\e[0m"
 
     if [ -n "$espeak_command" ]; then
         counter=0

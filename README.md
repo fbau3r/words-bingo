@@ -18,6 +18,20 @@ At the end of the game remove the file `.used-my-words.txt` with the following c
 rm .used-my-words.txt
 ```
 
+## Advanced Usage
+
+Place all the words used on your Bingo Cards in a **custom file** (e.g. `my-top150-words.txt`) and start the script with the following command:
+
+```bash
+bash words-bingo.sh my-top150-words.txt
+```
+
+At the end of the game remove the file `.used-my-top150-words.txt` with the following command:
+
+```bash
+rm .used-my-top150-words.txt
+```
+
 ## Dependencies
 
 This script uses `espeak` TTS. To install with apt-get use the following command:

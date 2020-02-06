@@ -12,10 +12,10 @@ Place all the words used on your Bingo Cards in the file `my-words.txt` and star
 bash words-bingo.sh
 ```
 
-At the end of the game remove the file `my-words-used.txt` with the following command:
+At the end of the game remove the file `.used-my-words.txt` with the following command:
 
 ```bash
-rm my-words-used.txt
+rm .used-my-words.txt
 ```
 
 ## Dependencies

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 wordlist_filename=my-words.txt
-used_words_filename=my-words-used.txt
+used_words_filename=.used-my-words.txt
 
 espeak_command="espeak -v en-us"
 

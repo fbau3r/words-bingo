@@ -21,7 +21,7 @@ fi
 touch $used_words_filename
 
 # as long as we have unused words in the list
-while [ 0 -lt "$( list_left_words | wc -l )" ]; do
+while [ 0 -lt "$(list_left_words | wc -l)" ]; do
     clear
     echo -e "\e[33m"
     word=$(list_left_words | \

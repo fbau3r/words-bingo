@@ -28,8 +28,13 @@ while [ 0 -lt "$( list_left_words | wc -l )" ]; do
         tee -a $used_words_filename
     echo -e "\e[0m"
 
-    # wait for ENTER key to display the next word
-    read -p "Press ENTER to see the next random word..."
+        # wait for user input...
+        echo '
+ENTER .... next random word
+q ........ quit program'
+        read -p "" user_input
+
+        [ "$user_input" == "q" ] && exit 0
 done
 
 # all words used up

@@ -34,8 +34,8 @@ rm .used-my-top150-words.txt
 
 ## Dependencies
 
-This script uses `espeak` TTS. To install with apt-get use the following command:
+This script uses `espeak` TTS to output the spoken words and `cowsay` to output the word on screen. To install with apt-get use the following command:
 
 ```bash
-sudo apt-get install espeak
+sudo apt-get install espeak cowsay
 ```

@@ -4,6 +4,7 @@ wordlist_filename=${1:-my-words.txt}
 used_words_filename=.used-$(basename $wordlist_filename)
 
 espeak_command="espeak -v en-us"
+word_echo_command="cowsay" # default is "echo"
 
 list_all_words() {
     cat $wordlist_filename | sort -u
@@ -33,8 +34,8 @@ while [ 0 -lt "$(list_left_words | wc -l)" ]; do
     echo -e "\e[33m"
     word=$(list_left_words | \
         shuf -n 1)
-    echo $word | \
-        tee -a $used_words_filename
+    echo $word >> $used_words_filename
+    $word_echo_command $word
     echo -e "\e[0m"
     echo
 
